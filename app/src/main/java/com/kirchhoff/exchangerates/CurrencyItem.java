@@ -5,16 +5,16 @@ package com.kirchhoff.exchangerates;
  */
 public class CurrencyItem {
 
-    private int id;
+    private String id;
     private long time;
     private String name;
-    private double rate;
+    private String rate;
 
-    public double getRate() {
+    public String getRate() {
         return rate;
     }
 
-    public void setRate(double rate) {
+    public void setRate(String rate) {
         this.rate = rate;
     }
 
@@ -34,11 +34,11 @@ public class CurrencyItem {
         this.time = time;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 }
