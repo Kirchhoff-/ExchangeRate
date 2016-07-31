@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.kirchhoff.exchangerates.database.CurrencyItem;
 import com.kirchhoff.exchangerates.R;
 
+import java.util.Iterator;
+
 /**
  * @author Kirchhoff-
  */
@@ -19,6 +21,8 @@ public class CurrencyDetailsFragment extends Fragment implements CurrencyDetails
     private CurrencyDetailsContract.Presenter presenter;
 
     private TextView rate;
+
+    private TextView history;
 
     public CurrencyDetailsFragment() {
         // Requires empty public constructor.
@@ -37,6 +41,8 @@ public class CurrencyDetailsFragment extends Fragment implements CurrencyDetails
 
         rate = (TextView) root.findViewById(R.id.rate);
 
+        history = (TextView) root.findViewById(R.id.history);
+
         return root;
     }
 
@@ -50,6 +56,12 @@ public class CurrencyDetailsFragment extends Fragment implements CurrencyDetails
     @Override
     public void showWeatherDetails(CurrencyItem item) {
         rate.setText(item.getRate());
+
+        // In future can move this to RecyclerView or ListView
+        for(String key : item.getHistory().keySet()) {
+            String buf = key + " - " + item.getHistory().get(key) + "\n";
+            history.append(buf);
+        }
     }
 
     public boolean isActive(){

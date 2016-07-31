@@ -46,6 +46,9 @@ public class CurrencyDao extends BaseDaoImpl<CurrencyItem, Integer> {
             try {
                 CurrencyItem currencyItem = this.queryForSameId(item);
                 if (currencyItem == null) {
+                    LinkedHashMap<String, String> map = new LinkedHashMap<>();
+                    map.put(Time.getTime(item.getTime()),item.getRate());
+                    item.setHistory(map);
                     this.createOrUpdate(item);
                 } else {
                     if (currencyItem.getHistory() != null) {
