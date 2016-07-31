@@ -5,10 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.kirchhoff.exchangerates.CurrencyItem;
+import com.kirchhoff.exchangerates.database.CurrencyItem;
 import com.kirchhoff.exchangerates.R;
 
 import java.util.ArrayList;

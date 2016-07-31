@@ -2,7 +2,7 @@ package com.kirchhoff.exchangerates.currencydetails;
 
 import android.support.annotation.NonNull;
 
-import com.kirchhoff.exchangerates.CurrencyItem;
+import com.kirchhoff.exchangerates.database.CurrencyItem;
 
 /**
  * @author Kirchhoff-

@@ -7,9 +7,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.kirchhoff.exchangerates.CurrencyItem;
+import com.kirchhoff.exchangerates.database.CurrencyItem;
 import com.kirchhoff.exchangerates.R;
 import com.kirchhoff.exchangerates.database.DatabaseManager;
+import com.kirchhoff.exchangerates.utils.LogUtils;
 
 /**
  * @author Kirchhoff-
@@ -27,6 +28,8 @@ public class CurrencyDetailsActivity extends AppCompatActivity {
 
         String id = getIntent().getStringExtra(CURRENCY_ITEM_ID);
         CurrencyItem item = DatabaseManager.getHelper().getCurrencyDao().getItem(id);
+
+        LogUtils.d("LINKED HASH LIST = " + item.getHistory().toString());
 
         // Set up the toolbar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.kirchhoff.exchangerates.CurrencyItem;
+import com.kirchhoff.exchangerates.database.CurrencyItem;
 import com.kirchhoff.exchangerates.R;
 
 /**

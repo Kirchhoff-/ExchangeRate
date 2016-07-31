@@ -17,7 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kirchhoff.exchangerates.CurrencyItem;
+import com.kirchhoff.exchangerates.database.CurrencyItem;
 import com.kirchhoff.exchangerates.R;
 import com.kirchhoff.exchangerates.currencydetails.CurrencyDetailsActivity;
 import com.kirchhoff.exchangerates.utils.LogUtils;

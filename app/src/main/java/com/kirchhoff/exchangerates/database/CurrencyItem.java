@@ -1,7 +1,10 @@
-package com.kirchhoff.exchangerates;
+package com.kirchhoff.exchangerates.database;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+
+import java.util.LinkedHashMap;
 
 /**
  * @author Kirchhoff-
@@ -12,6 +15,7 @@ public class CurrencyItem {
     public static final String TIME_COLUMN = "time";
     public static final String NAME_COLUMN = "name";
     public static final String RATE_COLUMN = "rate";
+    public static final String HISTORY_COLUMN = "history";
     public static final String ID_COLUMN = "id";
 
     @DatabaseField(columnName = ID_COLUMN, id = true)
@@ -22,6 +26,16 @@ public class CurrencyItem {
     private String name;
     @DatabaseField(columnName = RATE_COLUMN)
     private String rate;
+    @DatabaseField(columnName = HISTORY_COLUMN, dataType = DataType.SERIALIZABLE)
+    private LinkedHashMap<String, String> history;
+
+    public LinkedHashMap<String, String> getHistory() {
+        return history;
+    }
+
+    public void setHistory(LinkedHashMap<String, String> history) {
+        this.history = history;
+    }
 
     public String getRate() {
         return rate;

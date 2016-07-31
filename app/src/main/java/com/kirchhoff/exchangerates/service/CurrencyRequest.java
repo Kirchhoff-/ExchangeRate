@@ -2,7 +2,7 @@ package com.kirchhoff.exchangerates.service;
 
 import android.net.Uri;
 
-import com.kirchhoff.exchangerates.CurrencyItem;
+import com.kirchhoff.exchangerates.database.CurrencyItem;
 import com.kirchhoff.exchangerates.database.DatabaseManager;
 import com.kirchhoff.exchangerates.utils.Time;
 import com.octo.android.robospice.request.okhttp.OkHttpSpiceRequest;
@@ -43,7 +43,8 @@ public class CurrencyRequest extends OkHttpSpiceRequest<ArrayList<CurrencyItem>>
 
         // With Uri.Builder class we can build our url is a safe manner
         Uri.Builder uriBuilder = Uri.parse("http://www.cbr.ru/scripts/XML_daily.asp?").buildUpon();
-        uriBuilder.appendQueryParameter("date_req", Time.getTime(0));
+        //uriBuilder.appendQueryParameter("date_req", Time.getTime(0));
+        uriBuilder.appendQueryParameter("date_req", "30/07/2016");
 
         URI uri = new URI(uriBuilder.build().toString());
 
@@ -109,8 +110,9 @@ public class CurrencyRequest extends OkHttpSpiceRequest<ArrayList<CurrencyItem>>
             }
 
             // Write currency to database
-            if(currencyList.size() > 0)
+            if(currencyList.size() > 0) {
                 DatabaseManager.getHelper().getCurrencyDao().writeCurrencyToDatabase(currencyList);
+            }
 
 
             return currencyList;
