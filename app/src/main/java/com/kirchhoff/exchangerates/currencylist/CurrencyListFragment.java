@@ -192,6 +192,11 @@ public class CurrencyListFragment extends Fragment implements CurrencyListContra
         Toast.makeText(getActivity(), R.string.internet_error, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void showDateError() {
+        Toast.makeText(getActivity(), R.string.date_error, Toast.LENGTH_SHORT).show();
+    }
+
 
     @Override
     public boolean isActive() {

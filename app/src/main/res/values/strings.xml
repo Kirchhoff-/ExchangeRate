@@ -2,4 +2,5 @@
     <string name="app_name">Обменный курс</string>
 
     <string name= "internet.error">Проверьте интернет соединение</string>
+    <string name = "date.error">Проверьте дату и время установленные на телефоне</string>
 </resources>

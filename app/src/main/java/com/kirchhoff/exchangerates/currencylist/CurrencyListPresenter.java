@@ -80,13 +80,13 @@ public class CurrencyListPresenter implements CurrencyListContract.Presenter {
     @Override
     public void loadCurrencyList() {
         List<CurrencyItem> currencyList = DatabaseManager.getHelper().getCurrencyDao().getAllRecord();
-        if (currencyList == null) {
+      //  if (currencyList == null) {
 
             if (ExchangeRateApplication.isOnline())
                 onlineService.execute(new CurrencyRequest(), new GetCurrencyListener());
             else
                 mainView.showInternetError();
-        } else {
+      /*  } else {
             mainView.showLoadIndicator(false);
             mainView.showRefreshIndicator(false);
 
@@ -94,7 +94,7 @@ public class CurrencyListPresenter implements CurrencyListContract.Presenter {
             mainView.showCurrencyList(new ArrayList<CurrencyItem>(currencyList));
 
             mainView.setDate(currencyList.get(0).getTime());
-        }
+        } */
 
 
     }
@@ -128,9 +128,13 @@ public class CurrencyListPresenter implements CurrencyListContract.Presenter {
             mainView.showLoadIndicator(false);
             mainView.showRefreshIndicator(false);
 
-            firstLoad = false;
-            mainView.showCurrencyList(currencyList);
-            mainView.setDate(currencyList.get(0).getTime());
+            if(currencyList.size() > 0) {
+                firstLoad = false;
+                mainView.showCurrencyList(currencyList);
+                mainView.setDate(currencyList.get(0).getTime());
+            } else {
+                mainView.showDateError();
+            }
         }
     }
 
