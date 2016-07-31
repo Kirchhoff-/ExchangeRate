@@ -102,7 +102,7 @@ public class CurrencyListFragment extends Fragment implements CurrencyListContra
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                presenter.refreshCurrencyList();
             }
         });
 

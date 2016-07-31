@@ -30,6 +30,8 @@ public interface CurrencyListContract {
 
         void loadCurrencyList();
 
+        void refreshCurrencyList();
+
         void showCurrencyDetails(String id);
 
         void onViewCreated();

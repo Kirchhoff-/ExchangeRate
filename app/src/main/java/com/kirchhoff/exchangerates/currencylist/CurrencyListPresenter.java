@@ -66,6 +66,11 @@ public class CurrencyListPresenter implements CurrencyListContract.Presenter {
         }
     }
 
+    @Override
+    public void refreshCurrencyList() {
+        mainView.showRefreshIndicator(true);
+        onlineService.execute(new CurrencyRequest(), new GetCurrencyListener());
+    }
 
     @Override
     public void loadCurrencyList() {
@@ -97,6 +102,9 @@ public class CurrencyListPresenter implements CurrencyListContract.Presenter {
             // The view may not be able to handle UI updates anymore
             if (!mainView.isActive())
                 return;
+
+            mainView.showLoadIndicator(false);
+            mainView.showRefreshIndicator(false);
         }
 
         @Override
