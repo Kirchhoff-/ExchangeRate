@@ -49,4 +49,18 @@ public class CurrencyDao extends BaseDaoImpl<CurrencyItem, Integer> {
         }
     }
 
+
+    public CurrencyItem getItem(String id){
+
+        CurrencyItem item = new CurrencyItem();
+        item.setId(id);
+        try {
+           return this.queryForSameId(item);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 }

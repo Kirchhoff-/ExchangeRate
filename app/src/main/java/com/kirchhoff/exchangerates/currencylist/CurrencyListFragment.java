@@ -1,8 +1,8 @@
 package com.kirchhoff.exchangerates.currencylist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -17,10 +17,10 @@ import android.widget.ProgressBar;
 
 import com.kirchhoff.exchangerates.CurrencyItem;
 import com.kirchhoff.exchangerates.R;
+import com.kirchhoff.exchangerates.currencydetails.CurrencyDetailsActivity;
 import com.kirchhoff.exchangerates.utils.LogUtils;
 
 import java.util.ArrayList;
-import java.util.Currency;
 
 /**
  * @author Kirchhoff-
@@ -33,9 +33,9 @@ public class CurrencyListFragment extends Fragment implements CurrencyListContra
     private CurrencyListAdapter adapter;
 
     private ScrollChildSwipeRefreshLayout refreshLayout;
-    
+
     private RecyclerView recyclerView;
-    
+
     private ProgressBar progressBar;
 
 
@@ -102,16 +102,16 @@ public class CurrencyListFragment extends Fragment implements CurrencyListContra
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-               // presenter.refreshWeatherList(adapter.getWeatherArray());
+
             }
         });
 
 
         // Set up listener on list item
-        adapter.setCallback(new  CurrencyListAdapter.Callback() {
+        adapter.setCallback(new CurrencyListAdapter.Callback() {
             @Override
             public void onItemClick(int position) {
-
+                presenter.showCurrencyDetails(adapter.getCurrencyId(position));
             }
         });
 
@@ -131,7 +131,7 @@ public class CurrencyListFragment extends Fragment implements CurrencyListContra
     public void showLoadIndicator(boolean active) {
 
         if (active) {
-           progressBar.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
         } else {
             progressBar.setVisibility(View.GONE);
@@ -167,8 +167,10 @@ public class CurrencyListFragment extends Fragment implements CurrencyListContra
 
 
     @Override
-    public void showCurrencyDetails(CurrencyItem currencyElement) {
-
+    public void showCurrencyDetails(String id) {
+        Intent intent = new Intent(getActivity(), CurrencyDetailsActivity.class);
+        intent.putExtra(CurrencyDetailsActivity.CURRENCY_ITEM_ID, id);
+        startActivity(intent);
     }
 
 

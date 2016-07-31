@@ -47,6 +47,10 @@ public class CurrencyListAdapter extends RecyclerView.Adapter<CurrencyListAdapte
         return currencyList;
     }
 
+    public String getCurrencyId(int position){
+        return currencyList.get(position).getId();
+    }
+
     @Override
     public int getItemCount() {
         return currencyList.size();

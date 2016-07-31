@@ -20,7 +20,7 @@ public interface CurrencyListContract {
 
         void showCurrencyList(ArrayList<CurrencyItem> list);
 
-        void showCurrencyDetails(CurrencyItem item);
+        void showCurrencyDetails(String id);
 
         boolean isActive();
     }
@@ -30,7 +30,7 @@ public interface CurrencyListContract {
 
         void loadCurrencyList();
 
-        void showCurrencyDetails(CurrencyItem item);
+        void showCurrencyDetails(String id);
 
         void onViewCreated();
 

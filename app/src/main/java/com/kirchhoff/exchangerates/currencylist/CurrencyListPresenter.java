@@ -85,8 +85,8 @@ public class CurrencyListPresenter implements CurrencyListContract.Presenter {
 
 
     @Override
-    public void showCurrencyDetails(CurrencyItem item) {
-        // weatherListView.showWeatherDetails(weatherElement);
+    public void showCurrencyDetails(String id) {
+        mainView.showCurrencyDetails(id);
     }
 
 
