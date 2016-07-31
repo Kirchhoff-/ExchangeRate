@@ -3,6 +3,7 @@ package com.kirchhoff.exchangerates.service;
 import android.net.Uri;
 
 import com.kirchhoff.exchangerates.CurrencyItem;
+import com.kirchhoff.exchangerates.database.DatabaseManager;
 import com.kirchhoff.exchangerates.utils.Time;
 import com.octo.android.robospice.request.okhttp.OkHttpSpiceRequest;
 
@@ -30,7 +31,7 @@ public class CurrencyRequest extends OkHttpSpiceRequest<ArrayList<CurrencyItem>>
 
     public CurrencyRequest() {
         super(null);
-        currencyList = new ArrayList<>();
+        currencyList = new ArrayList<>(0);
 
     }
 
@@ -106,6 +107,11 @@ public class CurrencyRequest extends OkHttpSpiceRequest<ArrayList<CurrencyItem>>
 
                 eventType = parser.next();
             }
+
+            // Write currency to database
+            if(currencyList.size() > 0)
+                DatabaseManager.getHelper().getCurrencyDao().writeCurrencyToDatabase(currencyList);
+
 
             return currencyList;
         } finally {

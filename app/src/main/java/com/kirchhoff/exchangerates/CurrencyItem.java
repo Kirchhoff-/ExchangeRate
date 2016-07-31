@@ -1,13 +1,26 @@
 package com.kirchhoff.exchangerates;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 /**
  * @author Kirchhoff-
  */
+@DatabaseTable(tableName = "weather_table")
 public class CurrencyItem {
 
+    public static final String TIME_COLUMN = "time";
+    public static final String NAME_COLUMN = "name";
+    public static final String RATE_COLUMN = "rate";
+    public static final String ID_COLUMN = "id";
+
+    @DatabaseField(columnName = ID_COLUMN, id = true)
     private String id;
+    @DatabaseField(columnName = TIME_COLUMN)
     private long time;
+    @DatabaseField(columnName = NAME_COLUMN)
     private String name;
+    @DatabaseField(columnName = RATE_COLUMN)
     private String rate;
 
     public String getRate() {

@@ -4,13 +4,16 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.kirchhoff.exchangerates.CurrencyItem;
+import com.kirchhoff.exchangerates.database.DatabaseManager;
 import com.kirchhoff.exchangerates.service.CurrencyRequest;
 import com.kirchhoff.exchangerates.service.OnlineService;
+import com.kirchhoff.exchangerates.utils.LogUtils;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Kirchhoff-
@@ -66,13 +69,24 @@ public class CurrencyListPresenter implements CurrencyListContract.Presenter {
 
     @Override
     public void loadCurrencyList() {
-        onlineService.execute(new CurrencyRequest(), new GetCurrencyListener());
+        List<CurrencyItem> currencyList = DatabaseManager.getHelper().getCurrencyDao().getAllRecord();
+        if (currencyList == null)
+            onlineService.execute(new CurrencyRequest(), new GetCurrencyListener());
+        else {
+            mainView.showLoadIndicator(false);
+            mainView.showRefreshIndicator(false);
+
+            firstLoad = false;
+            mainView.showCurrencyList(new ArrayList<CurrencyItem>(currencyList));
+        }
+
+
     }
 
 
     @Override
     public void showCurrencyDetails(CurrencyItem item) {
-       // weatherListView.showWeatherDetails(weatherElement);
+        // weatherListView.showWeatherDetails(weatherElement);
     }
 
 
