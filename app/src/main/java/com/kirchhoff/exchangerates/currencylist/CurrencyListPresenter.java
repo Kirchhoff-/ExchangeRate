@@ -4,10 +4,10 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.kirchhoff.exchangerates.CurrencyItem;
+import com.kirchhoff.exchangerates.ExchangeRateApplication;
 import com.kirchhoff.exchangerates.database.DatabaseManager;
 import com.kirchhoff.exchangerates.service.CurrencyRequest;
 import com.kirchhoff.exchangerates.service.OnlineService;
-import com.kirchhoff.exchangerates.utils.LogUtils;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -68,16 +68,25 @@ public class CurrencyListPresenter implements CurrencyListContract.Presenter {
 
     @Override
     public void refreshCurrencyList() {
-        mainView.showRefreshIndicator(true);
-        onlineService.execute(new CurrencyRequest(), new GetCurrencyListener());
+        if (ExchangeRateApplication.isOnline()) {
+            mainView.showRefreshIndicator(true);
+            onlineService.execute(new CurrencyRequest(), new GetCurrencyListener());
+        } else {
+            mainView.showRefreshIndicator(false);
+            mainView.showInternetError();
+        }
     }
 
     @Override
     public void loadCurrencyList() {
         List<CurrencyItem> currencyList = DatabaseManager.getHelper().getCurrencyDao().getAllRecord();
-        if (currencyList == null)
-            onlineService.execute(new CurrencyRequest(), new GetCurrencyListener());
-        else {
+        if (currencyList == null) {
+
+            if (ExchangeRateApplication.isOnline())
+                onlineService.execute(new CurrencyRequest(), new GetCurrencyListener());
+            else
+                mainView.showInternetError();
+        } else {
             mainView.showLoadIndicator(false);
             mainView.showRefreshIndicator(false);
 

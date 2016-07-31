@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kirchhoff.exchangerates.CurrencyItem;
 import com.kirchhoff.exchangerates.R;
@@ -184,6 +185,11 @@ public class CurrencyListFragment extends Fragment implements CurrencyListContra
     public void setDate(long date) {
         String time = Time.getTime(date);
         currencyDate.setText(Time.getTime(date));
+    }
+
+    @Override
+    public void showInternetError() {
+        Toast.makeText(getActivity(), R.string.internet_error, Toast.LENGTH_SHORT).show();
     }
 
 

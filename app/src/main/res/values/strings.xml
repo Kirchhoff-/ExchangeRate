@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Обменный курс</string>
+
+    <string name= "internet.error">Проверьте интернет соединение</string>
 </resources>

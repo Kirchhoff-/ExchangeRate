@@ -24,6 +24,8 @@ public interface CurrencyListContract {
 
         void setDate(long date);
 
+        void showInternetError();
+
         boolean isActive();
     }
 
