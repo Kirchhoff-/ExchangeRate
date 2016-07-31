@@ -22,6 +22,8 @@ public interface CurrencyListContract {
 
         void showCurrencyDetails(String id);
 
+        void setDate(long date);
+
         boolean isActive();
     }
 

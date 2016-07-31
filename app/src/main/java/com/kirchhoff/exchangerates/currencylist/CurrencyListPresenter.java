@@ -83,6 +83,8 @@ public class CurrencyListPresenter implements CurrencyListContract.Presenter {
 
             firstLoad = false;
             mainView.showCurrencyList(new ArrayList<CurrencyItem>(currencyList));
+
+            mainView.setDate(currencyList.get(0).getTime());
         }
 
 
@@ -119,6 +121,7 @@ public class CurrencyListPresenter implements CurrencyListContract.Presenter {
 
             firstLoad = false;
             mainView.showCurrencyList(currencyList);
+            mainView.setDate(currencyList.get(0).getTime());
         }
     }
 

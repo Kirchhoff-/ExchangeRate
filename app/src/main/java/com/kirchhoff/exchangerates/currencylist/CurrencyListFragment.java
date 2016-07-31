@@ -14,11 +14,13 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.kirchhoff.exchangerates.CurrencyItem;
 import com.kirchhoff.exchangerates.R;
 import com.kirchhoff.exchangerates.currencydetails.CurrencyDetailsActivity;
 import com.kirchhoff.exchangerates.utils.LogUtils;
+import com.kirchhoff.exchangerates.utils.Time;
 
 import java.util.ArrayList;
 
@@ -37,6 +39,8 @@ public class CurrencyListFragment extends Fragment implements CurrencyListContra
     private RecyclerView recyclerView;
 
     private ProgressBar progressBar;
+
+    private TextView currencyDate;
 
 
     public CurrencyListFragment() {
@@ -79,6 +83,7 @@ public class CurrencyListFragment extends Fragment implements CurrencyListContra
         refreshLayout = (ScrollChildSwipeRefreshLayout) root.findViewById(R.id.refreshLayout);
         recyclerView = (RecyclerView) root.findViewById(R.id.recyclerView);
         progressBar = (ProgressBar) root.findViewById(R.id.progressBar);
+        currencyDate = (TextView) root.findViewById(R.id.date);
 
         //For improving performance
         recyclerView.setHasFixedSize(true);
@@ -133,9 +138,11 @@ public class CurrencyListFragment extends Fragment implements CurrencyListContra
         if (active) {
             progressBar.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
+            currencyDate.setVisibility(View.GONE);
         } else {
             progressBar.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
+            currencyDate.setVisibility(View.VISIBLE);
         }
     }
 
@@ -171,6 +178,12 @@ public class CurrencyListFragment extends Fragment implements CurrencyListContra
         Intent intent = new Intent(getActivity(), CurrencyDetailsActivity.class);
         intent.putExtra(CurrencyDetailsActivity.CURRENCY_ITEM_ID, id);
         startActivity(intent);
+    }
+
+    @Override
+    public void setDate(long date) {
+        String time = Time.getTime(date);
+        currencyDate.setText(Time.getTime(date));
     }
 
 

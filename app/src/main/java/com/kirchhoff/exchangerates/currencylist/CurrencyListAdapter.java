@@ -1,5 +1,6 @@
 package com.kirchhoff.exchangerates.currencylist;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,12 +95,12 @@ public class CurrencyListAdapter extends RecyclerView.Adapter<CurrencyListAdapte
 
         TextView name;
         TextView rate;
-        LinearLayout mainLayout;
+        CardView mainLayout;
         CurrencyItem item;
 
         public CurrencyViewHolder(View itemView) {
             super(itemView);
-            mainLayout = (LinearLayout) itemView.findViewById(R.id.mainLayout);
+            mainLayout = (CardView) itemView.findViewById(R.id.mainLayout);
             name = (TextView) itemView.findViewById(R.id.name);
             rate = (TextView) itemView.findViewById(R.id.rate);
         }
