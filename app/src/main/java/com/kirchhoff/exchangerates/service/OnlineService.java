@@ -15,6 +15,8 @@ public class OnlineService extends OkHttpSpiceService {
 
     @Override
     public CacheManager createCacheManager(Application application) throws CacheCreationException {
-        return new CacheManager();
+        CacheManager manager = new CacheManager();
+        manager.addPersister(new CurrencyRequestPersistent(2048));
+        return manager;
     }
 }

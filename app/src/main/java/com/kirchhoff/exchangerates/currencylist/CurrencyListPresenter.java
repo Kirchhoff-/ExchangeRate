@@ -8,12 +8,15 @@ import com.kirchhoff.exchangerates.ExchangeRateApplication;
 import com.kirchhoff.exchangerates.database.DatabaseManager;
 import com.kirchhoff.exchangerates.service.CurrencyRequest;
 import com.kirchhoff.exchangerates.service.OnlineService;
+import com.kirchhoff.exchangerates.utils.Time;
 import com.octo.android.robospice.SpiceManager;
+import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Kirchhoff-
@@ -70,7 +73,8 @@ public class CurrencyListPresenter implements CurrencyListContract.Presenter {
     public void refreshCurrencyList() {
         if (ExchangeRateApplication.isOnline()) {
             mainView.showRefreshIndicator(true);
-            onlineService.execute(new CurrencyRequest(), new GetCurrencyListener());
+            onlineService.execute(new CurrencyRequest(), Time.getTime(0),
+                    DurationInMillis.ALWAYS_RETURNED, new GetCurrencyListener());
         } else {
             mainView.showRefreshIndicator(false);
             mainView.showInternetError();
@@ -80,13 +84,14 @@ public class CurrencyListPresenter implements CurrencyListContract.Presenter {
     @Override
     public void loadCurrencyList() {
         List<CurrencyItem> currencyList = DatabaseManager.getHelper().getCurrencyDao().getAllRecord();
-      //  if (currencyList == null) {
+        if (currencyList == null) {
 
             if (ExchangeRateApplication.isOnline())
-                onlineService.execute(new CurrencyRequest(), new GetCurrencyListener());
+                onlineService.execute(new CurrencyRequest(), Time.getTime(0),
+                        DurationInMillis.ALWAYS_RETURNED, new GetCurrencyListener());
             else
                 mainView.showInternetError();
-      /*  } else {
+       } else {
             mainView.showLoadIndicator(false);
             mainView.showRefreshIndicator(false);
 
@@ -94,7 +99,7 @@ public class CurrencyListPresenter implements CurrencyListContract.Presenter {
             mainView.showCurrencyList(new ArrayList<CurrencyItem>(currencyList));
 
             mainView.setDate(currencyList.get(0).getTime());
-        } */
+        }
 
 
     }
